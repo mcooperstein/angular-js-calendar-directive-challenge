@@ -83,19 +83,20 @@ app.directive('mySimpleCalendar', function () {
 
             //set the month and year to the current month and year by applying ng-model to the
             //dropdown menu, capturing user choice & storing in currentMonth/currentYear variables
-            //$scope.selectedMonth = currentMonth;
+            //$scope.currentMonth = currentMonth;
+            $scope.selectedMonth = currentMonth;
             $scope.selectedYear = currentYear;
-            $scope.startMonth = currentMonth;
+            //$scope.startMonth = currentMonth;
 
             //when different month/year chosen from drop down menu, show appropriate calendar
             //by applying ng-change to dropdown menu & setting equal to refreshCalendar function
-            $scope.refreshCal = function () {
+            $scope.refreshCalendar = function () {
                 currentMonth = $scope.selectedMonth;
-                $scope.loadCal($scope.selectedYear, $scope.selectedMonth);
+                $scope.loadCalendar($scope.selectedYear, $scope.selectedMonth);
             };
 
             //load the calendar using function found in calendarRange.js
-            $scope.loadCal = function (year, month) {
+            $scope.loadCalendar = function (year, month) {
                 $scope.range = CalendarRange.getMonthlyRange(new Date(year, month));
                 //darken out any days that aren't part of the current month
                 $scope.range.days.forEach(greyOut);
@@ -103,7 +104,7 @@ app.directive('mySimpleCalendar', function () {
             };
 
             //display the calendar when page loads
-            $scope.loadCal(currentYear, currentMonth);
+            $scope.loadCalendar(currentYear, currentMonth);
 
             //make the days that are part of last month or next month a different color
             //than the days of the current month
